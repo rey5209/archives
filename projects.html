@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API and Instruction</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Archives</a></li>
+                <li><a href="about.html">About this project</a></li>
+                <li><a href="projects.html">API</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="projects">
+            <h1>API and Instruction</h1>
+            <div class="project-list">
+                <div class="project-item">
+                    <h2>Firebase Config Example</h2>
+                    <p>Example configuration for connecting a web app to Firebase.</p>
+                    <pre><code class="language-javascript">export const firebaseConfig = {
+  apiKey: "[YOURAPI]",
+  authDomain: "yourfirebase.firebaseapp.com",
+  projectId: "counting-system",
+  storageBucket: "yourfirebase.appspot.com",
+  messagingSenderId: "[ your app sender id]",
+  appId: "[ your app id]",
+};
+
+//firebase base path
+export const BASE_PATH = '[your base-path]';
+</code></pre>
+                </div>
+                <div class="project-item">
+                    <h2>Firebase List of Items</h2>
+                    <p>Simply change the name in the array below without removing the quotation marks (") and commas (,).</p>
+                    <pre><code class="language-javascript">export const arr = [
+  "AGUILAR",
+  "ALITAYA",
+  "ANGIO",
+  "AWAY",
+  "BAAY EXT",
+  "BACABAC",
+  "BALOCOC",
+  "BALOLING",
+  "BANAYBAYAN EXT",
+  "BATENG",
+  "BINDAY",
+  "BINMALEY",
+  "BISBISOCOL",
+  "BOLO",
+  "BONUAN",
+  "BUGALLON",
+  "CALASIAO",
+  "CALIT",
+  "CALMAY",
+  "CARAEL",
+  "COLISAO",
+  "DAGUPAN CITY",
+  "DAVID",
+  "DOMALANDAN",
+  "DULAG",
+  "GARCIA",
+  "HACIENDA",
+  "HAWAY",
+  "INMALOG",
+  "LAGUIT CENTRO",
+  "LEET",
+  "LINGAYEN",
+  "LOBONG",
+  "LONGOS CALASIAO EXT",
+  "LONGOS SAN FABIAN EXT",
+  "LUYAN",
+  "MAAMBAL",
+  "MAASIN EXT",
+  "MABILAO",
+  "MAGTAKING",
+  "MALINDONG EXT",
+  "MAMALINGLING",
+  "MANAOAG",
+  "MANAOAG DOS",
+  "MANGALDAN",
+  "MAPANDAN",
+  "MATALAVA",
+  "NIÑOY",
+  "PANGAPISAN NORTH",
+  "PALUA EXT",
+  "PUGARO",
+  "QUETEGAN",
+  "ROSARIO",
+  "SALOMAGUE",
+  "SAN FABIAN",
+  "SAN JACINTO",
+  "SAN RAMON EXT",
+  "TALIBAEW EXT",
+  "TULONG"
+];
+</code></pre>
+                </div>
+                <div class="project-item">
+                    <h2>JSON Data Example</h2>
+                    <p>Example of a JSON data structure for your project, with inline instructions:</p>
+                    <pre><code class="language-json">{
+  "jsonData": [
+    {
+      // Your title, this is an example
+      "tittle": "TITLE | DISTRITO | INCMV AWARDS 2025",
+      "subTittle": "Facebook",
+      // [name image format] must be jpg
+      "image": "22.jpg",
+      // Your link, for example YouTube
+      "link": "https://youtu.be/OwZJkrPtMjM?si=qLlSW8KVk03MbkQz&t=1",
+      "allowEdit": false,
+      "redirectPage": true,
+      "page": "watch",
+      "redirect_text": "Sending View From Youtube",
+      "different_link_per_data": false,
+      "different_img_per_data": false,
+      // Your datatype, can be 'firebase' or 'azure.app' or others
+      "viewDataType": "firebase",
+      // You can change this if you use Azure or another backend
+      // "viewDataType": "azure.app",
+      "viewData": [
+        // Your view data in Firebase Config Example
+        // 'lokal' is your local or district, change it to match your firebase config
+        // 'duration' is how much duration you want
+        // 'image' your image name, must be jpg
+        // 'views' you can change this if you are not using a database
+        {"lokal": "Aguilar", "duration": "4:45", "link": "", "image": "22.jpg", "views": 0}
+      ]
+    }
+  ]
+}
+</code></pre>
+                </div>
+                    <!-- OpenAI Token Key Example -->
+                     <div class="project-item">
+                    <section>
+                        <h2>OpenAI Token Key Example (Python) for your Microsoft Azure OpenAI</h2>
+                        <p>If you’re brave enough to take on AI, I suggest trying Microsoft OpenAI.</p>
+                        <pre><code class="language-python">import json
+import os
+from openai import OpenAI
+
+# ====== SETUP ======
+# Your OpenAI API key (token)
+os.environ["OPENAI_API_KEY"] = "your-openai-api-key-here"
+
+# Path to your views.json
+file_path = "views.json"
+
+# ====== LOAD JSON ======
+with open(file_path, "r") as f:
+    views_data = json.load(f)
+
+# ====== AI UPDATE INSTRUCTION ======
+instruction = "Increase all 'view_count' fields by 1 and keep everything else unchanged."
+
+# ====== OPENAI CALL ======
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "You are a JSON editor. Only output valid JSON."},
+        {"role": "user", "content": f"Here is the JSON:\n{json.dumps(views_data, indent=2)}\n\n{instruction}"}
+    ],
+    temperature=0
+)
+
+# ====== PARSE AI OUTPUT ======
+updated_json_str = response.choices[0].message.content
+updated_views = json.loads(updated_json_str)
+
+# ====== SAVE BACK TO FILE ======
+with open(file_path, "w") as f:
+    json.dump(updated_views, f, indent=2)
+
+print("✅ views.json updated successfully!")
+    </code></pre>
+                    </section>
+                <!-- Add more project items as needed -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Rey Ramos Tuñacao and Harvy Moresca. All rights reserved.</p>
+    </footer>
+    <script src="assets/script.js"></script>
+</body>
+</html>
