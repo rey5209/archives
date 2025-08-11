@@ -1,3 +1,131 @@
+/* Smooth hide/show nav bar on scroll using transform */
+nav {
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1), padding 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, box-shadow 0.3s;
+}
+nav.hide-nav {
+    transform: translateY(-120%);
+}
+/* Hide nav links and show symbol on scroll */
+nav.shrink ul {
+    display: none !important;
+}
+nav .nav-symbol {
+    display: none;
+    color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+nav.shrink .nav-symbol {
+    display: flex;
+    opacity: 1;
+    position: fixed;
+    top: 0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: rgba(24,24,27,0.22);
+    border-radius: 1.2em;
+    padding: 0.15em 0.7em;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    backdrop-filter: blur(12px);
+}
+/* Animated sticky nav bar that shrinks on scroll */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #18181b;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+nav {
+    transition: padding 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, box-shadow 0.3s;
+    padding: 0.45em 0 0.45em 0;
+    background: transparent;
+}
+nav.shrink {
+    padding: 0.01em 0 0.01em 0;
+    background: rgba(24,24,27,0.22);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    backdrop-filter: blur(12px);
+}
+nav ul {
+    display: flex;
+    gap: 1.2em;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: font-size 0.3s;
+}
+nav.shrink ul li a {
+    font-size: 0.85em;
+    padding: 0.07em 0.45em;
+}
+nav.shrink .nav-symbol {
+    font-size: 1.3em;
+    height: 1.5em;
+}
+nav.shrink ul {
+    gap: 1em;
+}
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 0.3em 1.2em;
+    border-radius: 1.2em;
+    transition: background 0.2s, color 0.2s, font-size 0.3s;
+}
+nav ul li a:hover {
+    background: #e50914;
+    color: #fff;
+}
+/* Responsive adjustments for iPhone 12 Pro (390x844px) */
+@media (max-width: 430px) {
+    body {
+        font-size: 15px;
+        padding: 0 0.5em;
+    }
+    header nav ul {
+        flex-direction: column;
+        gap: 0.5em;
+        padding: 0.5em 0;
+    }
+    .archive-list li a,
+    .project-list pre code {
+        font-size: 0.98em;
+        padding: 0.7em 0.7em 0.7em 1.2em;
+        border-radius: 0.7em;
+        width: 100%;
+        box-sizing: border-box;
+        word-break: break-all;
+    }
+    .archive-list li {
+        margin: 0.7em 0;
+    }
+    .project-list pre {
+        margin: 0.7em 0;
+    }
+    .project-item {
+        padding: 0.5em 0.2em;
+    }
+    h1, h2 {
+        font-size: 1.2em;
+    }
+    .code-modal, .windowed-code {
+        width: 98vw !important;
+        max-width: 99vw !important;
+        min-width: 0 !important;
+        padding: 1em 0.5em 1em 1em !important;
+        font-size: 1em !important;
+    }
+}
 /* GitHub-style syntax highlighting for code blocks */
 pre code {
     background: #282c34 !important;
