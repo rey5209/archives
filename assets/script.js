@@ -25,16 +25,26 @@ window.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Extensionless navigation for .html links using a JSON mapping
     const urlMap = {
-        'about.html': '/about',
-        'projects.html': '/projects',
-        'index.html': '/'
+        'about.html': 'about',
+        'projects.html': 'projects',
+        'index.html': ''
     };
     document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
         const href = link.getAttribute('href');
-        if (urlMap[href]) {
+        if (urlMap[href] !== undefined) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.location.pathname = urlMap[href];
+                // Try to go to extensionless path, fallback to .html if 404
+                const target = window.location.origin + '/' + urlMap[href];
+                fetch(target, { method: 'HEAD' }).then(function(resp) {
+                    if (resp.ok) {
+                        window.location.assign(target);
+                    } else {
+                        window.location.assign(href);
+                    }
+                }).catch(function() {
+                    window.location.assign(href);
+                });
             });
         }
     });
