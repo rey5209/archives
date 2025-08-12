@@ -23,6 +23,21 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 });
 document.addEventListener('DOMContentLoaded', function() {
+    // Extensionless navigation for .html links using a JSON mapping
+    const urlMap = {
+        'about.html': '/about',
+        'projects.html': '/projects',
+        'index.html': '/'
+    };
+    document.querySelectorAll('a[href$=".html"]').forEach(function(link) {
+        const href = link.getAttribute('href');
+        if (urlMap[href]) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.pathname = urlMap[href];
+            });
+        }
+    });
     const form = document.querySelector('form');
     if (form) {
         form.addEventListener('submit', function(e) {
