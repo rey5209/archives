@@ -1,63 +1,9 @@
-/* Flex layout for Example Token JSON section on desktop */
-.token-json-flex {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: 2em;
-    margin: 2em 0 1em 0;
-}
-.token-json-desc {
-    min-width: 180px;
-    max-width: 350px;
-}
-/* Responsive code block for token-json-flex */
-.token-json-flex pre {
-    margin: 0;
-    min-width: 0;
-    max-width: 100%;
-    font-size: 0.92em;
-    padding: 0.7em 0.7em 0.7em 1.1em;
-    border-radius: 0.6em;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-@media (max-width: 700px) {
-    .token-json-flex pre {
-        font-size: 0.85em;
-        padding: 0.5em 0.5em 0.5em 0.7em;
-        border-radius: 0.5em;
-    }
-}
-@media (max-width: 700px) {
-    .token-json-flex {
-        display: block;
-    }
-    .token-json-desc, .token-json-flex pre {
-        min-width: 0;
-        max-width: 100%;
-    }
-}
 /* Smooth hide/show nav bar on scroll using transform */
 nav {
-    transition: transform 0.45s cubic-bezier(.4,0,.2,1), opacity 0.35s cubic-bezier(.4,0,.2,1), padding 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, box-shadow 0.3s;
-    opacity: 1;
-    animation: navFadeIn 0.7s cubic-bezier(.4,0,.2,1);
-
-@keyframes navFadeIn {
-    from { opacity: 0; transform: translateY(-32px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-    background: rgba(30, 41, 59, 0.92);
-    border-radius: 1.2em;
-    box-shadow: 0 2px 16px rgba(30,41,59,0.08);
-    margin: 1.2em auto 1.5em auto;
-    max-width: 900px;
-    padding: 0.45em 2em 0.45em 2em;
-    position: relative;
-    z-index: 20;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1), padding 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, box-shadow 0.3s;
 }
 nav.hide-nav {
     transform: translateY(-120%);
-    opacity: 0;
 }
 /* Hide nav links and show symbol on scroll */
 nav.shrink ul {
@@ -89,44 +35,33 @@ nav.shrink .nav-symbol {
     backdrop-filter: blur(12px);
 }
 /* Animated sticky nav bar that shrinks on scroll */
-footer {
-    font-size: 0.82em;
-    padding: 0.4em 0 0.15em 0;
-    background: #19191c;
-    color: #b0b0b0;
-    text-align: center;
-    border-top: 1px solid #23232a;
-    letter-spacing: 0.01em;
-    opacity: 0.85;
-    margin-top: 2em;
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #18181b;
+    transition: box-shadow 0.2s, background 0.2s;
 }
-footer p {
-    margin: 0.2em 0 0 0;
-    font-size: 1em;
-    font-weight: 400;
-    line-height: 1.5;
+nav {
+    transition: padding 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, box-shadow 0.3s;
+    padding: 0.45em 0 0.45em 0;
+    background: transparent;
 }
-@media (max-width: 700px) {
-    footer {
-        font-size: 0.72em;
-        padding: 0.25em 0 0.1em 0;
-        margin-top: 1.2em;
-    }
-    footer p {
-        font-size: 0.98em;
-    }
+nav.shrink {
+    padding: 0.01em 0 0.01em 0;
+    background: rgba(24,24,27,0.22);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    backdrop-filter: blur(12px);
 }
 nav ul {
     display: flex;
-    gap: 1.5em;
+    gap: 1.2em;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
     list-style: none;
     transition: font-size 0.3s;
-    background: none;
-    border-radius: 0.8em;
 }
 nav.shrink ul li a {
     font-size: 0.85em;
@@ -142,25 +77,14 @@ nav.shrink ul {
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.08em;
-    padding: 0.32em 1.3em;
+    font-size: 1.1em;
+    padding: 0.3em 1.2em;
     border-radius: 1.2em;
-    transition: background 0.2s, color 0.2s, font-size 0.3s, box-shadow 0.2s;
-    background: transparent;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+    transition: background 0.2s, color 0.2s, font-size 0.3s;
 }
 nav ul li a:hover {
-    background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+    background: #e50914;
     color: #fff;
-    box-shadow: 0 2px 8px rgba(56,189,248,0.10);
-    text-decoration: none;
-}
-nav ul li a:active {
-    background: #23232b;
-    color: #38bdf8;
-    box-shadow: 0 1px 2px rgba(56,189,248,0.08);
 }
 /* Responsive adjustments for iPhone 12 Pro (390x844px) */
 @media (max-width: 430px) {
@@ -215,21 +139,6 @@ pre code {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     border: 1px solid #22262c;
     position: relative;
-    nav {
-        max-width: 98vw;
-        margin: 0.5em auto 1em auto;
-        padding: 0.3em 0.5em;
-        border-radius: 0.7em;
-    }
-    nav ul {
-        gap: 0.7em;
-        border-radius: 0.5em;
-    }
-    nav ul li a {
-        font-size: 1em;
-        padding: 0.22em 0.7em;
-        border-radius: 0.7em;
-    }
 }
 /* Syntax colors (GitHub inspired) */
 .language-python .token.comment,
